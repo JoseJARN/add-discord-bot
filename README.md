@@ -19,25 +19,25 @@ La verdad es que no tengo mucho más que contar sobre ello. Si quiero actualizar
 ## Instrucciones
 
 ```
-welcome_channel = client.get_channel(WELCOME_CHANNEL_ID)
+welcome_channel = client.get_channel(CHANNEL_WELCOME_ID)
 ```
 
-- **WELCOME_CHANNEL_ID** = ID del canal donde aterrizan los nuevos usuarios
+- **CHANNEL_WELCOME_ID** = ID del canal donde aterrizan los nuevos usuarios
 
 ```
-channel = client.get_channel(CHANNEL_ID)
+channel = client.get_channel(CHANNEL_GENERAL_ID)
 ```
 
-- **CHANNEL_ID** = ID del canal donde quieres que el bot de los buenos días.
+- **CHANNEL_GENERAL_ID** = ID del canal donde quieres que el bot de los buenos días.
 
 ```
-channel = client.get_channel(MENTION_CHANNEL_ID)
+channel = client.get_channel(CHANNEL_MENTION_ID)
 ```
 
-- **CHANNEL_ID** = ID del canal donde quieres que el bot mencione al usuario que ha escrito más de 10 mensajes.
+- **CHANNEL_GENERAL_ID** = ID del canal donde quieres que el bot mencione al usuario que ha escrito más de 10 mensajes.
 
 ```
-channel = client.get_channel(MENTION_CHANNEL_ID)
+channel = client.get_channel(CHANNEL_MENTION_ID)
 ```
 
 - **TOKEN** = El token que generas cuando creas una aplicación para el bot.

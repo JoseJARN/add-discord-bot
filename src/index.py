@@ -35,7 +35,7 @@ async def reset_messages_per_day():
 @tasks.loop(time=[TIME_GOOD_MORNING])
 async def send_morning_message():
     # Enviamos el mensaje de buenos días
-    channel = client.get_channel(int(config["CHANNEL_BOTS_ID"]))
+    channel = client.get_channel(int(config["CHANNEL_GENERAL_ID"]))
     await channel.send(
         "Buenos días a tod@s. ¡¡A por el %s!!" % days_of_week[datetime.datetime.now().weekday()])
 
@@ -43,6 +43,10 @@ async def send_morning_message():
 @client.event
 async def on_ready():
     print(f'- El bot ha iniciado sesión {client}')
+
+    # Iniciamos sesión enviando un mensaje en el canal de bots
+    channel = client.get_channel(int(config["CHANNEL_BOTS_ID"]))
+    await channel.send("¡Hola, devs! He arrancado.")
 
     # Tareas: Iniciamos la tarea que envía el mensaje de buenos días
     send_morning_message.start()

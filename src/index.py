@@ -80,8 +80,8 @@ async def on_message(message):
     messages_per_day[message.author] += 1
 
     # Si un usuario envía más de 10 mensajes, lo mencionamos en un canal
-    if messages_per_day[message.author] == 10 and message.author != client.user:
-        await message.channel.send(f"Madre mía illo, hoy no paras de escribir colega {message.author.mention}")
+    if messages_per_day[message.author] == 50 and message.author != client.user:
+        await message.channel.send(f"Madre mía, {message.author.mention}... Hoy no paras de escribir, colega...")
 
 
 @client.event

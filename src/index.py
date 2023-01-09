@@ -60,6 +60,22 @@ async def on_message(message):
     if current_message == 'ping':
         await message.channel.send('¡Pong!')
 
+    # Comprobamos si el usuario ha enviado el comando !youtube para enviarle el enlace del canal
+    if current_message == '!youtube':
+        await message.channel.send('Aquí tienes el canal de ADD Costa Tropical 📹💙 https://www.youtube.com/@ADDCostaTropical')
+
+    # Comprobamos si ha enviado !meetup o !eventos
+    if current_message == '!meetup' or current_message == '!eventos':
+        await message.channel.send('Aquí tienes el calendario de eventos de ADD Costa Tropical 📅💙 https://www.meetup.com/addcostatropical/')
+
+    # Comprobamos si ha enviado !twitter
+    if current_message == '!twitter':
+        await message.channel.send('Aquí tienes el perfil de Twitter de ADD Costa Tropical 🐦💙 https://twitter.com/addcostatropica')
+
+    # Comprobamos si ha enviado !instagram
+    if current_message == '!instagram':
+        await message.channel.send('Aquí tienes el perfil de Instagram de ADD Costa Tropical 📸💙 https://www.instagram.com/addcostatropical/')
+
     # Contamos el número de mensajes que envía cada usuario
     messages_per_day[message.author] += 1
 

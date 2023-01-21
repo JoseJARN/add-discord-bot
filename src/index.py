@@ -88,6 +88,11 @@ async def on_message(message):
     if messages_per_day[message.author] == 50 and message.author != client.user:
         await message.channel.send(f"Madre mía, {message.author.mention}... Hoy no paras de escribir, colega...")
 
+    # Si el usuario Joaquín menciona a este bot o le responde un mensaje al bot, le enviamos un mensaje
+    if message.author.id == int(config['USER_JOAQUIN']) and (client.user.mentioned_in(message) or (message.reference and message.reference.resolved.author == client.user)):
+        # enviamos una foto como respuesta
+        await message.channel.send(file=discord.File('../data/img/joaquinillo.jpg'))
+
 
 @client.event
 async def on_member_join(member):

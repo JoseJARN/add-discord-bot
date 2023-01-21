@@ -25,7 +25,12 @@ TIME_MIDNIGHT = datetime.time(hour=0, minute=0, second=0, tzinfo=TIMEZONE)
 TIME_GOOD_MORNING = datetime.time(hour=9, minute=0, second=0, tzinfo=TIMEZONE)
 
 
-@tasks.loop(time=TIME_MIDNIGHT)
+async def send_devs_message(channel, message):
+    channel = client.get_channel(int(config["CHANNEL_BOTS_ID"]))
+    await channel.send(message)
+
+
+@tasks.loop(time=[TIME_MIDNIGHT])
 async def reset_messages_per_day():
     # Reseteamos el contador de mensajes de cada usuario
     messages_per_day.clear()

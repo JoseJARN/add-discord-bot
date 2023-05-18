@@ -4,6 +4,7 @@ from discord.ext import commands
 from discord.ext import tasks
 from collections import defaultdict
 import datetime
+import pytz
 
 days_of_week = ["lunes", "martes", "miércoles",
                 "jueves", "viernes", "sábado", "domingo"]
@@ -20,7 +21,7 @@ client = discord.Client(intents=intents)
 
 # Tarea: resetear el contador de mensajes cada día a las 12 de la noche
 # MADRID AS TIMEZONE
-TIMEZONE = datetime.timezone(datetime.timedelta(hours=1))
+TIMEZONE = pytz.timezone('Europe/Madrid')
 TIME_MIDNIGHT = datetime.time(hour=0, minute=0, second=0, tzinfo=TIMEZONE)
 TIME_GOOD_MORNING = datetime.time(hour=9, minute=0, second=0, tzinfo=TIMEZONE)
 

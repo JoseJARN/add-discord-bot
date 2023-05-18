@@ -69,7 +69,7 @@ client = discord.Client(intents=intents)
 # MADRID AS TIMEZONE
 TIMEZONE = datetime.timezone(datetime.timedelta(hours=1))
 TIME_MIDNIGHT = datetime.time(hour=0, minute=0, second=0, tzinfo=TIMEZONE)
-TIME_GOOD_MORNING = datetime.time(hour=9, minute=0, second=0, tzinfo=TIMEZONE)
+TIME_GOOD_MORNING = datetime.time(hour=8, minute=15, second=0, tzinfo=TIMEZONE)
 TIME_EVERY_MINUTE = datetime.time(second=0, tzinfo=TIMEZONE)
 
 

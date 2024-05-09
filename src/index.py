@@ -4,22 +4,34 @@ from discord.ext import tasks
 from collections import defaultdict
 import datetime
 import pytz
+import ssl
+import certifi
+import aiohttp
 
+# Crear un contexto SSL personalizado
+ssl_context = ssl.create_default_context(cafile=certifi.where())
+connector = aiohttp.TCPConnector(ssl=ssl_context)
+
+# Días de la semana
 days_of_week = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]
 
+# Variables para el control de mensajes
 messages_per_day = defaultdict(int)
 
+# Cargar las variables de entorno desde los archivos .env
 config = dotenv_values(".env")
 connection = dotenv_values(".connection.env")
 
+# Configurar el bot y los permisos
 intents = discord.Intents.default()
 intents.message_content = True
-client = discord.Client(intents=intents)
+client = discord.Client(intents=intents, connector=connector)
 
 # Definición de las zonas horarias y horas de tareas
 TIMEZONE = pytz.timezone('Europe/Madrid')
 TIME_MIDNIGHT = datetime.time(hour=0, minute=0, second=0, tzinfo=TIMEZONE)
 TIME_GOOD_MORNING = datetime.time(hour=9, minute=0, second=0, tzinfo=TIMEZONE)
+TIME_GOOD_AFTERNOON = datetime.time(hour=16, minute=30, second=0, tzinfo=TIMEZONE)
 
 # Variables para la funcionalidad adicional
 last_message_time = datetime.datetime.now(TIMEZONE)
@@ -39,6 +51,12 @@ async def send_morning_message():
     if channel:
         weekday_index = datetime.datetime.now(TIMEZONE).weekday()
         await channel.send(f"Buenos días a tod@s. ¡¡A por el {days_of_week[weekday_index]}!!")
+
+@tasks.loop(time=[TIME_GOOD_AFTERNOON])
+async def send_afternoon_message():
+    channel = client.get_channel(int(config["CHANNEL_GENERAL_ID"]))
+    if channel:
+        await channel.send("Cuanto tiempo amigas mías, ¿qué tal todo? Os echaba de más. 😘")
 
 @tasks.loop(hours=1)
 async def check_activity():
